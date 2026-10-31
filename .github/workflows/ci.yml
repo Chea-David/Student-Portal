@@ -1,0 +1,27 @@
+name: Dart Frog CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ] 
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Dart Environment
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install Dart Frog CLI
+        run: dart pub global activate dart_frog_cli
+
+      - name: Install Dependencies
+        run: dart pub get
+
+      - name: Check Code Quality (Analyze)
+        run: dart analyze

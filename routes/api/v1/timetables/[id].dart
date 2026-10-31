@@ -1,0 +1,12 @@
+import 'dart:io';
+import 'package:dart_frog/dart_frog.dart';
+import 'package:my_backend/controllers/timetable_controller.dart'; 
+
+Future<Response> onRequest(RequestContext context, String id) async {
+
+  if (context.request.method != HttpMethod.get) {
+    return Response(statusCode: HttpStatus.methodNotAllowed);
+  }
+
+  return TimetableController().getClassTimetable(id);
+}
